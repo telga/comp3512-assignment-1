@@ -9,6 +9,7 @@ function getDbConnection() {
     try {
         $pdo = new PDO(dsn: 'sqlite:' . DB_SQLITE);
         $pdo -> setAttribute(attribute: PDO::ATTR_ERRMODE, value: PDO::ERRMODE_EXCEPTION);
+        
         return $pdo;
     } catch (PDOException $e) {
         if (headers_sent()) {
@@ -19,5 +20,18 @@ function getDbConnection() {
     }
 }
 
+//Helper for multiple row queries.
+function getQuery($pdo, $query, $params = []) {
+    $statement = $pdo -> prepare($query);
+    $statement -> execute($params);
     
+    return $statement -> fetchAll(PDO::FETCH_ASSOC);
+}
 
+//Helper for single row queries.
+function getQuerySingle($pdo, $query, $params = []) {
+    $statement = $pdo -> prepare($query);
+    $statement -> execute($params);
+    
+    return $statement -> fetch(PDO::FETCH_ASSOC);
+}
