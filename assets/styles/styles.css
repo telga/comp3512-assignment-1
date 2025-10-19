@@ -22,7 +22,7 @@ header {
 
 header h1 {
     font-size: 1.5rem;
-    color: #2c3e50;
+    color: #303030;
 }
 
 nav {
@@ -32,7 +32,7 @@ nav {
 
 .nav-btn {
     padding: 0.5rem 1.5rem;
-    background-color: #c490b4;
+    background-color: #707070;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -41,7 +41,7 @@ nav {
 }
 
 .nav-btn:hover {
-    background-color: #b380a3;
+    background-color: #4d4d4d;
 }
 
 .header-container {
@@ -135,4 +135,107 @@ nav {
 .empty-state p {
     font-size: 1.1rem;
     color: #6c757d;
+}
+
+.port-title {
+    color: #303030;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+}
+
+.port-summary {
+    margin-bottom: 3rem;
+}
+
+.port-summary h3 {
+    color: #303030;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #c490b4;
+    padding-bottom: 0.5rem;
+}
+
+/*friend helped with grid cards*/
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.summary-card {
+    background: #d188ba;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card h4 {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.card-val {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.portfolio-details {
+    margin-top: 2rem;
+}
+
+.port-details h3 {
+    color: #303030;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #c490b4;
+    padding-bottom: 0.5rem;
+}
+
+.port-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.port-table thead {
+    background-color: #303030;
+    color: white;
+}
+
+.port-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.port-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.port-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.port-table td {
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+
+.symbol-link {
+    color: #e4a6d1;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.symbol-link:hover {
+    color: #cc94bb;
 }

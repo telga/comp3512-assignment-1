@@ -8,7 +8,7 @@ $connection = getDbConnection();
 $usersQuery = "SELECT id, firstname, lastname FROM users ORDER BY lastname, firstname";
 $users = getQuery(pdo: $connection, query: $usersQuery);
 
-//Check for id.
+//Check for id - liked shorthand so used ternary.
 $selectedID = isset($_GET['id']) ? $_GET['id'] : null;
 $portData = null;
 $portDetails = [];
@@ -32,33 +32,35 @@ if ($selectedID) {
     $totalShares = $sharesResult['total'];
 
     //portfolio detakls using closing price latest from history table.
+    //needed to group symbol and sum due to duplicates. example was tim goyer with twwo goog transactions.
     $detailsQuery = "
     SELECT 
             p.symbol,
             c.name,
             c.sector,
-            p.amount,
+            SUM(p.amount) as amount,
             (SELECT close FROM history WHERE symbol = p.symbol ORDER BY date DESC LIMIT 1) as latest_close
         FROM portfolio p
         INNER JOIN companies c ON p.symbol = c.symbol
         WHERE p.userId = ?
+        GROUP BY p.symbol
         ORDER BY c.name
     ";
     $portDetails = getQuery(pdo: $connection, query: $detailsQuery, params: [$selectedID]);
 
     //calculate total value.
-    $totalValue = 0;
+    $totalVal = 0;
 
     //not using key and using as detail will create a double on the last entry of the data set.
     foreach ($portDetails as $key => $detail) {
         $portDetails[$key]['value'] = $detail['amount'] * $detail['latest_close'];
-        $totalValue += $portDetails[$key]['value'];
+        $totalVal += $portDetails[$key]['value'];
     }
 
     $portData = [
         'companies' => $companiesCount,
         'shares' => $totalShares,
-        'totalValue' => $totalValue
+        'totalVal' => $totalVal
     ];
 }
 
@@ -107,7 +109,7 @@ if ($selectedID) {
             <?php else: ?>
                 <?php if ($selectedUser): ?>
                     <h2 class="port-title">
-                        <?php echo htmlspecialchars(string: $selectedUser['firstname'] . ' ' . $selectedUser['lastname']) . '\'s Portfolio Summary'; ?>
+                        <?php echo htmlspecialchars(string: $selectedUser['firstname'] . ' ' . $selectedUser['lastname']) . '\'s Portfolio'; ?>
                     </h2>
                 <?php endif; ?>
 
@@ -117,15 +119,15 @@ if ($selectedID) {
                     <div class="summary-cards">
                         <div class="summary-card">
                             <h4>Companies</h4>
-                            <div class="card-value"><?php echo $portData['companies']; ?></div>
+                            <div class="card-val"><?php echo $portData['companies']; ?></div>
                         </div>
                         <div class="summary-card">
                             <h4># Shares</h4>
-                            <div class="card-value"><?php echo number_format(num: $portData['shares']); ?></div>
+                            <div class="card-val"><?php echo number_format(num: $portData['shares']); ?></div>
                         </div>
                         <div class="summary-card">
                             <h4>Total Value</h4>
-                            <div class="card-value">$<?php echo number_format(num: $portData['totalValue'], decimals: 2); ?></div>
+                            <div class="card-val">$<?php echo number_format(num: $portData['totalVal'], decimals: 2); ?></div>
                         </div>
                     </div>
                 </section>
