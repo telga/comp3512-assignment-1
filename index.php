@@ -75,17 +75,11 @@ if ($selectedID) {
     <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1>Portfolio Project</h1>
-            <nav>
-                <a href="index.php" class="nav-btn">Home</a>
-                <a href="#" class="nav-btn">About</a>
-                <a href="#" class="nav-btn">APIs</a>
-            </nav>
-        </div>
-    </header>
-
+    <?php 
+        $activePage = 'home';
+        $basePath = '';
+        include 'views/nav.php'; 
+    ?>
     <div class="container">
         <aside class="customers-left">
             <h2>Customers</h2>

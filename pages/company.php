@@ -46,6 +46,7 @@ foreach ($history as $entry) {
 
 $avgVol = $historyCount > 0 ? $totVol / $historyCount : 0;
 
+$financials = json_decode(json: $company['financials'], associative: true);
 ?>
 
 <!DOCTYPE html>
@@ -57,16 +58,11 @@ $avgVol = $historyCount > 0 ? $totVol / $historyCount : 0;
     <link rel="stylesheet" href="../assets/styles/styles.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1>Portfolio Project</h1>
-            <nav>
-                <a href="../index.php" class="nav-btn">Home</a>
-                <a href="about.php" class="nav-btn">About</a>
-                <a href="api-test.php" class="nav-btn">APIs</a>
-            </nav>
-        </div>
-    </header>
+    <?php 
+        $activePage = 'company';
+        $basePath = '../';
+        include '../views/nav.php'; 
+    ?>
 
     <div class="company-container">
         <main class="company-main">
@@ -116,12 +112,41 @@ $avgVol = $historyCount > 0 ? $totVol / $historyCount : 0;
                     <p><?php echo htmlspecialchars(string: $company['description']); ?></p>
                 </div>
                 <?php endif; ?>
+
+                <?php if ($financials && is_array($financials) && isset($financials['years'])): ?>
+                <div class="company-financials">
+                    <h4>Financial Data</h4>
+                    <table class="financials-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Earnings</th>
+                                <th>Assets</th>
+                                <th>Liabilities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $yearCount = count($financials['years']);
+                            for ($i = 0; $i < $yearCount; $i++): 
+                            ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($financials['years'][$i]); ?></td>
+                                <td><?php echo '$' . number_format($financials['earnings'][$i], decimals: 2); ?></td>
+                                <td><?php echo '$' . number_format($financials['assets'][$i], decimals: 2); ?></td>
+                                <td><?php echo '$' . number_format($financials['liabilities'][$i], decimals: 2); ?></td>
+                            </tr>
+                            <?php endfor; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php endif; ?>
             </section>
             
             <!-- 3 month history -->
             <section class="company-history">
                 <h2>History (3M)</h2>
-                <div class="history-t-wrapper">
+                <div class="t-scroll-wrapper">
                     <table class="history-table">
                         <thead>
                             <tr>
