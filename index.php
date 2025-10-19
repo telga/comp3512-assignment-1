@@ -1,12 +1,36 @@
 <?php 
 require_once 'includes/config.inc.php';
 
-//Db connection
+//Db connection.
 $connection = getDbConnection();
 
 //Fetchall users sort by lname.
 $usersQuery = "SELECT id, firstname, lastname FROM users ORDER BY lastname, firstname";
 $users = getQuery(pdo: $connection, query: $usersQuery);
+
+//Check for id.
+$selectedID = isset($_GET['id']) ? $_GET['id'] : null;
+$portfolioData = null;
+$portfolioDetails = [];
+$selectedUser = null;
+
+if ($selectedID) {
+    //get user info from id.
+    $userQuery = "SELECT firstname, lastname FROM users WHERE id = ?";
+    $selectedUser = getQuerySingle(pdo: $connection, query: $userQuery, params: [$selectedID]);
+
+    //get portfolio data.
+    
+    //Count of unique symbols for the user.
+    $companiesQuery = "SELECT COUNT(DISTINCT symbol) as count FROM portfolio WHERE userId = ?";
+    $companiesResult = getQuerySingle(pdo: $connection, query: $companiesQuery, params: [$selectedID]);
+    $companiesCount = $companiesResult['count'];
+
+    //Sum of all shares for the user.
+    $sharesQuery = "SELECT SUM(amount) as total FROM portfolio WHERE userId = ?";
+    $sharesResult = getQuerySingle(pdo: $connection, query: $sharesQuery, params: [$selectedID]);
+    $totalShares = $sharesResult['total'];
+}
 
 
 ?>
