@@ -32,7 +32,7 @@ nav {
 
 .nav-btn {
     padding: 0.5rem 1.5rem;
-    background-color: #53595f;
+    background-color: #c490b4;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -41,7 +41,7 @@ nav {
 }
 
 .nav-btn:hover {
-    background-color: #43484d;
+    background-color: #b380a3;
 }
 
 .header-container {
@@ -49,6 +49,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1400px;
 }
 
 /*two column layout*/
@@ -58,6 +59,7 @@ nav {
     width: 100%;
     flex: 1;
     background-color: white;
+    max-width: 1400px; /*needed this for decent lookiung spacing*/
 }
 
 .customers-left {
@@ -102,7 +104,7 @@ nav {
     flex: 1;
 }
 
-.portfolio-btn {
+.port-btn {
     padding: 0.4rem 1rem;
     background-color: #e4a6d1; /*partner chose this color*/
     color: white;
@@ -112,6 +114,25 @@ nav {
     transition: background-color 0.3s;
 }
 
-.portfolio-btn:hover {
+.port-btn:hover {
     background-color: #cc94bb;
+}
+
+.port-main {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    text-align: center;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: #6c757d;
 }
