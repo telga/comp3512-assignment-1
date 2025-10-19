@@ -16,10 +16,13 @@ if (!$userID) {
 }
 
 try {
+    //get portfol;io entries for ref user with company details.
+    //join companies ti get sector info with name.
     $query = "
         SELECT
             p.id,
             p.userID,
+            p.symbol,
             p.amount,
             c.name as company_name,
             c.sector

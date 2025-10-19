@@ -18,7 +18,7 @@ try {
             ORDER BY date ASC
         ";
 
-        $result = getQuerySingle(pdo: $connection, query: $query, params: [strtoupper(string: $symbol)]);
+        $result = getQuery(pdo: $connection, query: $query, params: [strtoupper(string: $symbol)]);
         
         if ($result) {
             echo json_encode(value: $result);

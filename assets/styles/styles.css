@@ -502,17 +502,40 @@ nav {
     text-decoration: underline;
 }
 
-.api-info {
-    margin-top: 3rem;
-}
-
-.api-info h3 {
-    color: #2c3e50;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 0.5rem;
-}
-
-
 /*about */
+.about-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.about-section h3 {
+    color: #303030;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: #555555;
+}
+
+.about-section ul {
+    margin-left: 2rem;
+    line-height: 1.8;
+    color: #555555;
+}
+
+.about-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.note { /*stole from ai link to sc - https://imgur.com/a/00PklOI*/
+    background-color: #fff8e1;
+    border-left: 4px solid #ff9800;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #6d4c41;
+    font-weight: 500;
+    border-radius: 2px;
+}
