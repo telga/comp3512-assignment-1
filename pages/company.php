@@ -26,7 +26,7 @@ $historyQuery = "
     ORDER BY date DESC
 ";
 
-$history = getquery(pdo: $connection, query: $historyQuery, params: [$symbol]);
+$history = getQuery(pdo: $connection, query: $historyQuery, params: [$symbol]);
 
 //calculation for high, low, total volume, and average volume.
 $historyHigh = 0;
