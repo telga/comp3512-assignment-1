@@ -130,7 +130,7 @@ if ($selectedID) {
                     </div>
                 </section>
 
-                <!-- portfolio details -->
+                <!-- portfolio details - dad helped me work out tables-->
                 <section class="port-details">
                     <h3>Portfolio Details</h3>
                     <table class="port-table">
